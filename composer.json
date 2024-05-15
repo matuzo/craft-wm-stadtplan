@@ -1,0 +1,33 @@
+{
+  "name": "matuzo/craft-wm-stadtplan",
+  "description": "Stadtplan plugin für die Stadt Wien",
+  "type": "craft-plugin",
+  "keywords": ["stadtplan", "vienna", "wien"],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Manuel Matuzovic",
+      "homepage": "https://matuzo.at"
+    }
+  ],
+  "support": {
+    "email": "manuel@matuzo.at",
+    "issues": "https://github.com/matuzo/craft-wm-stadtplan/issues?state=open",
+    "source": "https://github.com/matuzo/craft-wm-stadtplan",
+    "docs": "https://github.com/matuzo/craft-wm-stadtplan/blob/master/README.md"
+  },
+  "require": {
+    "craftcms/cms": "^3.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "matuzo\\wmstadtplan\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Craft Stadt Wien Stadtplan",
+    "handle": "wm-stadtplan",
+    "developer": "Manuel Matuzovic",
+    "developerEmail": "manuel@matuzo.at"
+  }
+}
