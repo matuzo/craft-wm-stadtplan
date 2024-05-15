@@ -5,7 +5,7 @@
  * @license https://craftcms.github.io/license/
  */
 
-namespace wienermelange\stadtplan;
+namespace matuzo\wmstadtplan;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -52,14 +52,6 @@ class StadtplanField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSettingsHtml()
     {
         return
@@ -72,7 +64,7 @@ class StadtplanField extends Field implements PreviewableFieldInterface
                 'errors' => $this->getErrors('lng'),
             ]) .
             Cp::textFieldHtml([
-                'label' => Craft::t('app', 'Center Latiude'),
+                'label' => Craft::t('app', 'Center Latitude'),
                 'instructions' => Craft::t('app', 'lat Wert für das Zentrum der Karte, wenn die geladen wird.'),
                 'id' => 'lat',
                 'name' => 'lat',
@@ -92,91 +84,18 @@ class StadtplanField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function normalizeValue($value, ElementInterface $element = null)
-    {
-        return $value !== '' ? $value : null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function serializeValue($value, ElementInterface $element = null)
-    {
-        return $value !== null ? StringHelper::idnToUtf8Email($value) : null;
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function inputHtml($value, ElementInterface $element = null): string
     {
-        $mapClass = "map-" . Html::id();
-
         return
-            Html::cssFile("/wienermelange/wc-v1/css/wiener-melange.tokens.min.css") .
-            Html::jsFile("/wienermelange/wc-v1/js/components/Map/Map.js", ["type" => "module"]) .
-            Html::jsFile("/wienermelange/wc-v1/js/components/Icon/Icon.js", ["type" => "module"]) .
-            Html::jsFile("/wienermelange/wc-v1/js/components/Input/Input.js", ["type" => "module"]) .
-            Html::jsFile("/wienermelange/wc-v1/js/components/Stack/Stack.js", ["type" => "module"]) .
             Html::encodeParams('
-                <wm-map id="{id}" class="{class}" center="{lng}, {lat}" zoom="{zoom}" style="--map-ratio: 16 / 9; font-family: var(--wm-font-stack);" controls></wm-map>
+                <wm-map id="{id}" class="{class}" center="{lng}, {lat}" zoom="{zoom}" controls></wm-map>
             ',
                 [
                     'id' => $this->getInputId(),
-                    'class' => $mapClass,
                     'zoom' => $this->zoom,
                     'lng' => $this->lng,
                     'lat' => $this->lat,
                 ]
-            ) .
-            Html::id() .
-            Html::script('
-            document.querySelector(".' . $mapClass . '").addEventListener("wm-map-marker-submit", e => {
-                // Set Name
-                document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressName\"]").value = e.detail.text
-                
-                // Set lat and long
-                document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressLong\"]").value = e.detail.lng
-                document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressLat\"]").value = e.detail.lat
-
-                if (e.detail.address) {
-                    document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressStreet\"]").value = e.detail.address
-
-                    if (e.detail.address.split(" ").length > 1) {
-                        document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressStreet\"]").value = e.detail.address.split(" ").slice(0, -1).join(" ")
-                        document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressNumber\"]").value = e.detail.address.split(" ")[e.detail.address.split(" ").length - 1]
-                    } else {
-                        document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressNumber\"]").value = ""
-                    }
-                } else {
-                    document.querySelector(".' . $mapClass . '").closest("[data-id]").querySelector("input[id*=\"fields-addressStreet\"]").value = ""
-                }
-            })
-        ');
-    }
-
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getElementValidationRules(): array
-    {
-        return [
-            ['trim'],
-            ['email', 'enableIDN' => App::supportsIdn(), 'enableLocalIDN' => false],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTableAttributeHtml($value, ElementInterface $element): string
-    {
-        if (!$value) {
-            return '';
-        }
-        $value = Html::encode($value);
-        return "<a href=\"mailto:{$value}\">{$value}</a>";
+            );
     }
 }

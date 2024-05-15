@@ -1,0 +1,5 @@
+@import '/wienermelange/wc-v1/css/wiener-melange.tokens.min.css';
+
+wm-map {
+  font-family: var(--wm-font-stack);
+}

@@ -1,5 +1,5 @@
 {
-  "name": "matuzo/craft-wm-stadtplan",
+  "name": "matuzo/craft-wmstadtplan",
   "description": "Stadtplan plugin für die Stadt Wien",
   "type": "craft-plugin",
   "keywords": ["stadtplan", "vienna", "wien"],
