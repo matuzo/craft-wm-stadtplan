@@ -46,8 +46,8 @@ class StadtplanField extends Field implements PreviewableFieldInterface
      */
     public $placeholder;
     public $zoom = 16;
-    public $lng = 16.40228105;
-    public $lat = 48.25433339;
+    public $lng = 16.356551313418166;
+    public $lat = 48.211151008932525;
 
     /**
      * @inheritdoc
