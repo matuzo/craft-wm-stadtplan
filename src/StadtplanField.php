@@ -52,7 +52,7 @@ class StadtplanField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): string
     {
         return
             Cp::textFieldHtml([
