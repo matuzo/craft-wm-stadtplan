@@ -8,6 +8,8 @@ use matuzo\wmstadtplan\StadtplanField;
 use matuzo\wmstadtplan\StadtplanBundle;
 use craft\services\Fields;
 use yii\base\Event;
+use craft\web\View;
+use craft\events\TemplateEvent;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -22,9 +24,17 @@ class Plugin extends \craft\base\Plugin
         $event->types[] = StadtplanField::class;
       }
     );
+  
 
-    Craft::$app->view->hook('cp.entries.edit.content', function (array &$context) {
-      $this->view->registerAssetBundle(StadtplanBundle::class);
-    });
+    Event::on(
+      View::class,
+      View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
+      static function (TemplateEvent $event) {
+          if ($event->templateMode !== View::TEMPLATE_MODE_CP) {
+              return;
+          }
+          Craft::$app->getView()->registerAssetBundle(StadtplanBundle::class);
+      }
+  );
   }
 }
