@@ -88,7 +88,7 @@ class StadtplanField extends Field implements PreviewableFieldInterface
     {
         return
             Html::encodeParams('
-                <wm-map id="{id}" class="{class}" center="{lng}, {lat}" zoom="{zoom}" controls></wm-map>
+                <wm-map id="{id}" center="{lng}, {lat}" zoom="{zoom}" controls></wm-map>
             ',
                 [
                     'id' => $this->getInputId(),
