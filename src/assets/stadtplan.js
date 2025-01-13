@@ -1,7 +1,7 @@
-import '/wienermelange/wc-v1/js/components/Map/Map.js';
-import '/wienermelange/wc-v1/js/components/Icon/Icon.js';
-import '/wienermelange/wc-v1/js/components/Input/Input.js';
-import '/wienermelange/wc-v1/js/components/Stack/Stack.js';
+import '/wienermelange/assets/js/components/Map/Map.js';
+import '/wienermelange/assets/js/components/Icon/Icon.js';
+import '/wienermelange/assets/js/components/Input/Input.js';
+import '/wienermelange/assets/js/components/Stack/Stack.js';
 
 document.querySelector('#content').addEventListener("wm-map-marker-submit", e => {
   const map = e.target
