@@ -3,3 +3,8 @@
 wm-map {
   font-family: var(--wm-font-stack);
 }
+
+wm-map :is(dt,th,strong,label,button,.wm-e-button,tfoot td,.wm-e-label,wm-input,wm-textarea,wm-select,legend,caption,mark) {
+  --wm-theme-content-font-weight: unset;
+  --wm-theme-content-font-variation-settings: var(--wm-font-weight-bold);
+}
