@@ -7,10 +7,6 @@ document.querySelector('#content').addEventListener("wm-map-marker-submit", e =>
   const map = e.target
   const wrapper = map.closest('[data-id]')
 
-  // Set Name
-  const name = wrapper.querySelector("input[id*=\"fields-addressName\"]");
-  name.value = e.detail.text
-
   // Set lat and long
   const lng = wrapper.querySelector("input[id*=\"fields-addressLong\"]")
   const lat = wrapper.querySelector("input[id*=\"fields-addressLat\"]")
