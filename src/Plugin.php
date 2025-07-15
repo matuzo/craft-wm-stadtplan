@@ -24,17 +24,5 @@ class Plugin extends \craft\base\Plugin
         $event->types[] = StadtplanField::class;
       }
     );
-  
-
-    Event::on(
-      View::class,
-      View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
-      static function (TemplateEvent $event) {
-          if ($event->templateMode !== View::TEMPLATE_MODE_CP) {
-              return;
-          }
-          Craft::$app->getView()->registerAssetBundle(StadtplanBundle::class);
-      }
-  );
   }
 }

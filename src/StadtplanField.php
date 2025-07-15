@@ -86,7 +86,10 @@ class StadtplanField extends Field implements PreviewableFieldInterface
      */
     protected function inputHtml($value, ElementInterface $element = null): string
     {
+        Craft::$app->getView()->registerAssetBundle(StadtplanBundle::class);
+
         return
+        
             Html::encodeParams('
                 <wm-map id="{id}" center="{lng}, {lat}" zoom="{zoom}" controls></wm-map>
             ',
